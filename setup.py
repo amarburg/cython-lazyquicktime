@@ -4,7 +4,7 @@ from Cython.Build import cythonize
 
 setup(
     ext_modules = cythonize([
-            Extension("lazyqt", ["lazyqt.pyx"],
+            Extension("lazyqt", ["lazyqt/lazyqt.pyx"],
                         libraries=["lazyquicktime"] )
         ])
 )
