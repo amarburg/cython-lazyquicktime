@@ -8,6 +8,7 @@ setup(
     ext_modules = cythonize([
             Extension("lazyqt", ["lazyqt/lazyqt.pyx"],
                         libraries=["lazyquicktime"],
+                        include_dirs=['.', os.environ['GOPATH'] + "/src/github.com/amarburg/cgo-lazyquicktime/"],                        
                         library_dirs=['.', os.environ['GOPATH'] + "/src/github.com/amarburg/cgo-lazyquicktime/"],
                         runtime_library_dirs=['.', os.environ['GOPATH'] + "/src/github.com/amarburg/cgo-lazyquicktime/"])
         ])
