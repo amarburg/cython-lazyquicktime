@@ -6,9 +6,8 @@ LDFLAGS="-L$(CGO_PATH)"
 
 all: lazyqt_so
 
-lazyqt_so: lazyqt/lazyqt.pyx lazyqt/cgo_lazyqt.pxd
+lazyqt_so: lazyqt/lazyqt.pyx cgo_lazyqt.pxd
 	CFLAGS=$(CFLAGS) LDFLAGS=$(LDFLAGS) python setup.py build_ext -i
-	cp $(CGO_PATH)/liblazyquicktime.so lazyqt/
 
 test: test_data
 	LD_LIBRARY_PATH=$(shell pwd)/lazyqt python -m pytest test/
