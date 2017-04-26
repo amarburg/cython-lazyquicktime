@@ -13,14 +13,12 @@ cdef extern from "liblazyquicktime.h":
     IMG_32F = 2
 
   ctypedef struct ImageBuffer:
-    pass
-
-    # void *data
-    # int width
-    # int height
-    # int channels
-    # ImageDepth depth
-    # bint valid
+    void *data
+    int width
+    int height
+    int channels
+    ImageDepth depth
+    bint valid
 
   ImageBuffer GetFrame(char* p0, int p1);
   MovieInfo MovInfo(char* p0);

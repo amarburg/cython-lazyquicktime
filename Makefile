@@ -5,7 +5,7 @@ lazyqt_so: lazyqt/lazyqt.pyx cgo_lazyqt.pxd
 	python setup.py build_ext -i
 
 test: test_data lazyqt_so
-	python -m pytest test/
+	python -m pytest -s test/
 
 bench: test_data
 	python -m pytest benchmark/
