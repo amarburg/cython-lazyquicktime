@@ -20,8 +20,11 @@ test_data/CamHD_Vent_Short.mov:
 test_deps:
 	pip install -U pytest pytest-benchmark
 
+## Builds and installs a test Jupyter kernel for the local user
+kernel:
+	python -m ipykernel install --user --name lazyqt_test --display-name "LazyQT Test"
 
 clean:
 	rm -f *.so
 
-.PHONY: test clean lazyqt/lazyqt.c
+.PHONY: test clean kernel
