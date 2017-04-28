@@ -3,6 +3,8 @@ all: lazyqt_so
 
 lazyqt_so: lazyqt/lazyqt.pyx cgo_lazyqt.pxd
 	python setup.py build_ext -i
+	## Onlt on OSX....
+	install_name_tool -change liblazyquicktime.so $(env GOPATH)/src/github.com/amarburg/cgo-lazyquicktime/liblazyquicktime.so lazyqt.cpython-36m-darwin.so
 
 test: test_data lazyqt_so
 	python -m pytest -s test/

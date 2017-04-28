@@ -6,6 +6,14 @@ import numpy
 import os
 
 setup(
+  name='lazyqt',
+  version='0.1',
+  description='The funniest joke in the world',
+  url='https://github.com/amarburg/cython-lazyquicktime',
+  author='Aaron Marburg',
+  author_email='amarburg@apl.washington.edu',
+  license='MIT',
+  packages=['lazyqt'],
     ext_modules = cythonize([
             Extension("lazyqt", ["lazyqt/lazyqt.pyx"],
                         libraries=["lazyquicktime"],
