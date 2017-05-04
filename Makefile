@@ -1,16 +1,20 @@
 
-all: lazyqt_so
+all: lazyqt_so test
 
-lazyqt_so: lazyqt/lazyqt.pyx cgo_lazyqt.pxd
+lazyqt_so: pylazyqt/pylazyqt.pyx cgo_lazyqt.pxd
 	python setup.py build_ext -i
 	## Onlt on OSX....
-	install_name_tool -change liblazyquicktime.so $(env GOPATH)/src/github.com/amarburg/cgo-lazyquicktime/liblazyquicktime.so lazyqt.cpython-36m-darwin.so
+	install_name_tool -change liblazyquicktime.so $(env GOPATH)/src/github.com/amarburg/cgo-lazyquicktime/liblazyquicktime.so pylazyqt.cpython-36m-darwin.so
+
+
 
 test: test_data lazyqt_so
-	python -m pytest -s test/
+	pytest
 
 bench: test_data
-	python -m pytest benchmark/
+	pytest benchmark/
+
+
 
 test_data: test_data/CamHD_Vent_Short.mov
 
@@ -18,9 +22,6 @@ test_data/CamHD_Vent_Short.mov:
 	mkdir test_data/
 	curl -L -o test_data/CamHD_Vent_Short.mov https://github.com/amarburg/go-lazyfs-testfiles/blob/master/CamHD_Vent_Short.mov?raw=true
 	touch test_data/CamHD_Vent_Short.mov
-
-test_deps:
-	pip install -U pytest pytest-benchmark
 
 ## Builds and installs a test Jupyter kernel for the local user
 kernel:
