@@ -9,10 +9,17 @@ cimport numpy as np
 np.import_array()
 
 def movie_info( bytes path ):
-  return clazyqt.MovInfo( path )
+  info = clazyqt.MovInfo( path )
+  if info.valid == 0:
+    return None
+
+  return info
 
 def get_frame( bytes path, int frame ):
   img = clazyqt.GetFrame( path, frame )
+  if img.valid == 0:
+    return None
+
 
   nptype = parse_image_depth( img.depth )
 
