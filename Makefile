@@ -1,18 +1,25 @@
 
+UNAME_S := $(shell uname -s)
+
 all: lazyqt_so test
 
 lazyqt_so: pylazyqt/pylazyqt.pyx cgo_lazyqt.pxd
 	python setup.py build_ext -i
-	## Onlt on OSX....
-	install_name_tool -change liblazyquicktime.so $(env GOPATH)/src/github.com/amarburg/cgo-lazyquicktime/liblazyquicktime.so pylazyqt.cpython-36m-darwin.so
+
+ifeq ($(UNAME_S),Darwin)
+		## Only on OSX....
+		install_name_tool -change liblazyquicktime.so $(env GOPATH)/src/github.com/amarburg/cgo-lazyquicktime/liblazyquicktime.so pylazyqt.cpython-36m-darwin.so
+endif
 
 
 
 test: test_data lazyqt_so
-	pytest
+	python -m pytest test/
 
 bench: test_data
-	pytest benchmark/
+	python -m pytest benchmark/
+
+
 
 
 
